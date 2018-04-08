@@ -1,0 +1,26 @@
+<section class="todo-app">
+	<section class="todo-input">	
+		<mat-checkbox class="select-all"></mat-checkbox>
+		<mat-form-field>
+			<input matInput type="text" [(ngModel)]="newTodo" (keydown.enter)="addTodo()"/>
+		</mat-form-field>
+	</section>
+	<section class="todo-list" *ngIf="todoStorage.todos.length > 0">
+		<ul>
+			<li *ngFor="let todo of todoStorage.todos">
+			<mat-checkbox [ngModel]="todo.completed" color="primary" (change)="toggle(todo,$event)"></mat-checkbox>
+				{{todo.title}}
+				<button mat-icon-button color="warn" (click)="remove(todo)">
+					<mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
+				</button>
+			</li>
+		</ul>
+	</section>
+	<section class="todo-footer">
+		<span>1 item left</span>
+		<button>All</button>
+		<button>Active</button>
+		<button>Completed</button>
+		<button mat-button>Clear Complited</button>
+	</section>
+</section>
