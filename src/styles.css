@@ -1,2 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+.todo-app-content {
+	max-width : 600px;
+	margin : auto;
+}
+.todo-app-title {
+	text-align : center;
+}
+.select-all {
+	position : absolute;
+	bottom : 50px;
+}
+.new-todo-input-form-field {
+	width : 90%;
+	margin-left : 5%;
+	margin-right : 5%;
+}
+.todo-title {
+	min-width: 460px;
+    padding-left: 5px;
+    display: inline-block;
+}
+.todo-footer-content {
+	display : flex;
+	justify-content : space-between;
+}
+mat-card.todo-footer-content {
+	display:flex!important;
+}

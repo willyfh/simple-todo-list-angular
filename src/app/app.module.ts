@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {TodoStorage} from './services/todo-storage.service';
-import { MatButtonModule, MatInputModule, MatCheckboxModule } from '@angular/material';
+import { MatButtonModule, MatInputModule, MatCheckboxModule, MatCardModule, MatButtonToggleModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
 
@@ -21,7 +21,9 @@ import { AppComponent } from './app.component';
 	MatInputModule,
 	MatCheckboxModule,
 	BrowserAnimationsModule,
-	MatIconModule
+	MatIconModule,
+	MatCardModule,
+	MatButtonToggleModule
   ],
   providers: [TodoStorage],
   bootstrap: [AppComponent]

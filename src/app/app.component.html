@@ -1,26 +1,35 @@
 <section class="todo-app">
-	<section class="todo-input">	
-		<mat-checkbox class="select-all"></mat-checkbox>
-		<mat-form-field>
-			<input matInput type="text" [(ngModel)]="newTodo" (keydown.enter)="addTodo()"/>
-		</mat-form-field>
-	</section>
-	<section class="todo-list" *ngIf="todoStorage.todos.length > 0">
-		<ul>
-			<li *ngFor="let todo of todoStorage.todos">
-			<mat-checkbox [ngModel]="todo.completed" color="primary" (change)="toggle(todo,$event)"></mat-checkbox>
-				{{todo.title}}
-				<button mat-icon-button color="warn" (click)="remove(todo)">
+	<section class="todo-app-content">
+		<header>
+			<h1 class="todo-app-title">Simple To-Do List App</h1>
+		</header>
+		<section class="todo-input">	
+			<mat-card>
+				<mat-checkbox class="select-all"></mat-checkbox>
+				<mat-form-field class="new-todo-input-form-field">
+					<input matInput type="text" [(ngModel)]="newTodo" (keydown.enter)="addTodo()"/>
+				</mat-form-field>
+			</mat-card>
+		</section>
+		<section class="todo-list" *ngIf="todoStorage.todos.length > 0">
+			<mat-card *ngFor="let todo of todoStorage.todos">
+				<mat-checkbox [ngModel]="todo.completed" color="primary" (change)="toggle(todo,$event)"></mat-checkbox>
+				<span class="todo-title">{{todo.title}}</span>
+				<button mat-icon-button class="todo-delete" color="warn" (click)="remove(todo)">
 					<mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
 				</button>
-			</li>
-		</ul>
-	</section>
-	<section class="todo-footer">
-		<span>1 item left</span>
-		<button>All</button>
-		<button>Active</button>
-		<button>Completed</button>
-		<button mat-button>Clear Complited</button>
+			</mat-card>
+		</section>
+		<section class="todo-footer">
+			<mat-card flex class="todo-footer-content">
+				<button mat-button>1 item left</button>
+				<mat-button-toggle-group #group="matButtonToggleGroup" value="active">
+					<mat-button-toggle value="all">All</mat-button-toggle>
+					<mat-button-toggle value="active">Active</mat-button-toggle>
+					<mat-button-toggle value="completed">Completed</mat-button-toggle>
+				</mat-button-toggle-group>
+				<button mat-raised-button>Clear Completed</button>
+			</mat-card>
+		</section>
 	</section>
 </section>
