@@ -5,7 +5,7 @@
 		</header>
 		<section class="todo-input">	
 			<mat-card>
-				<mat-checkbox class="select-all"></mat-checkbox>
+				<mat-checkbox *ngIf="todoStorage.todos.length>0" class="select-all" color="primary"></mat-checkbox>
 				<mat-form-field class="new-todo-input-form-field">
 					<input matInput type="text" [(ngModel)]="newTodo" (keydown.enter)="addTodo()"/>
 				</mat-form-field>
@@ -22,13 +22,13 @@
 		</section>
 		<section class="todo-footer">
 			<mat-card flex class="todo-footer-content">
-				<button mat-button>1 item left</button>
-				<mat-button-toggle-group #group="matButtonToggleGroup" value="active">
-					<mat-button-toggle value="all">All</mat-button-toggle>
-					<mat-button-toggle value="active">Active</mat-button-toggle>
-					<mat-button-toggle value="completed">Completed</mat-button-toggle>
+				<button mat-button>{{getIncompleteTodoNum()}} item left</button>
+				<mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="filter">
+					<mat-button-toggle value="all" (click)="getAll()">All</mat-button-toggle>
+					<mat-button-toggle value="active" (click)="getByCompleted(false)">Active</mat-button-toggle>
+					<mat-button-toggle value="completed" (click)="getByCompleted(true)">Completed</mat-button-toggle>
 				</mat-button-toggle-group>
-				<button mat-raised-button>Clear Completed</button>
+				<button mat-raised-button (click)="removeCompleted()">Remove Completed</button>
 			</mat-card>
 		</section>
 	</section>

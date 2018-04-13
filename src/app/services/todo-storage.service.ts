@@ -32,6 +32,20 @@ export class TodoStorage {
 		this.updateStorage();
 	}
 	
+	getAll() {
+		this.todos = JSON.parse(localStorage.getItem('todo-angular') || '[]');
+	}
+	
+	getByCompleted(completed: Boolean) {
+		this.getAll();
+		this.todos = this.todos.filter((obj) => obj.completed === completed);
+	}
+	
+	removeCompleted(){
+		this.getByCompleted(false);
+		this.updateStorage();
+	}
+	
 	toggle(todo: Todo, event: any) {
 		for (let i=0; i<this.todos.length; i++) {
 			if (this.todos[i] === todo){
@@ -40,6 +54,11 @@ export class TodoStorage {
 			}
 		}
 		this.updateStorage();
+	}
+	getIncompleteTodo() {
+		let tempTodos = JSON.parse(localStorage.getItem('todo-angular') || '[]');
+		let count = tempTodos.filter((obj) => obj.completed === false).length;
+		return count;
 	}
 	
 }

@@ -8,7 +8,8 @@ import {TodoStorage, Todo} from './services/todo-storage.service'
 })
 export class AppComponent {
 	newTodo = '';
-	todoStorage: TodoStorage;  
+	todoStorage: TodoStorage;
+	filter = 'all';
 	constructor(todoStorage: TodoStorage) {
 		this.todoStorage = todoStorage;
 	}
@@ -24,5 +25,21 @@ export class AppComponent {
 	
 	toggle(todo: Todo, event:any){
 		this.todoStorage.toggle(todo,event);
+	}
+	
+	getAll(){
+		this.todoStorage.getAll();
+	}
+	
+	getIncompleteTodoNum(){
+		return this.todoStorage.getIncompleteTodo();
+	}
+	
+	getByCompleted(completed: Boolean) {
+		this.todoStorage.getByCompleted(completed);
+	}
+	removeCompleted() {
+		this.todoStorage.removeCompleted();
+		this.filter = 'all';
 	}
 }
