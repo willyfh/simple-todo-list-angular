@@ -5,30 +5,32 @@
 		</header>
 		<section class="todo-input">	
 			<mat-card>
-				<mat-checkbox *ngIf="todoStorage.todos.length>0" class="select-all" color="primary"></mat-checkbox>
+				<mat-checkbox *ngIf="todoStorage.todos.length>0" class="select-all" color="primary" (change)="toggleSelectAll($event)"></mat-checkbox>
 				<mat-form-field class="new-todo-input-form-field">
 					<input matInput type="text" [(ngModel)]="newTodo" (keydown.enter)="addTodo()"/>
 				</mat-form-field>
 			</mat-card>
 		</section>
-		<section class="todo-list" *ngIf="todoStorage.todos.length > 0">
-			<mat-card *ngFor="let todo of todoStorage.todos">
-				<mat-checkbox [ngModel]="todo.completed" color="primary" (change)="toggle(todo,$event)"></mat-checkbox>
-				<span class="todo-title">{{todo.title}}</span>
-				<button mat-icon-button class="todo-delete" color="warn" (click)="remove(todo)">
-					<mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
-				</button>
-			</mat-card>
+		<section class="todo-list">
+			<ng-container *ngFor="let todo of todoStorage.todos">
+				<mat-card *ngIf="(filter == 'active' && todo.completed == false) || (filter=='completed' && todo.completed == true) || (filter=='all')">
+					<mat-checkbox [ngModel]="todo.completed" color="primary" (change)="toggle(todo,$event)"></mat-checkbox>
+					<span class="todo-title">{{todo.title}}</span>
+					<button mat-icon-button class="todo-delete" color="warn" (click)="remove(todo)">
+						<mat-icon aria-label="Example icon-button with a heart icon">close</mat-icon>
+					</button>
+				</mat-card>
+			</ng-container>
 		</section>
 		<section class="todo-footer">
 			<mat-card flex class="todo-footer-content">
-				<button mat-button>{{getIncompleteTodoNum()}} item left</button>
+				<button mat-button>{{getIncompleteTodoCount()}} item left</button>
 				<mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="filter">
-					<mat-button-toggle value="all" (click)="getAll()">All</mat-button-toggle>
-					<mat-button-toggle value="active" (click)="getByCompleted(false)">Active</mat-button-toggle>
-					<mat-button-toggle value="completed" (click)="getByCompleted(true)">Completed</mat-button-toggle>
+					<mat-button-toggle value="all">All</mat-button-toggle>
+					<mat-button-toggle value="active">Active</mat-button-toggle>
+					<mat-button-toggle value="completed">Completed</mat-button-toggle>
 				</mat-button-toggle-group>
-				<button mat-raised-button (click)="removeCompleted()">Remove Completed</button>
+				<button mat-raised-button (click)="removeCompleted()">Remove All Completed</button>
 			</mat-card>
 		</section>
 	</section>

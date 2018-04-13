@@ -27,19 +27,15 @@ export class AppComponent {
 		this.todoStorage.toggle(todo,event);
 	}
 	
-	getAll(){
-		this.todoStorage.getAll();
+	getIncompleteTodoCount(){
+		return this.todoStorage.getIncompleteTodoCount();
 	}
 	
-	getIncompleteTodoNum(){
-		return this.todoStorage.getIncompleteTodo();
-	}
-	
-	getByCompleted(completed: Boolean) {
-		this.todoStorage.getByCompleted(completed);
-	}
 	removeCompleted() {
 		this.todoStorage.removeCompleted();
-		this.filter = 'all';
+	}
+	
+	toggleSelectAll(event: any) {
+		this.todoStorage.toggleSelectAll(event);
 	}
 }

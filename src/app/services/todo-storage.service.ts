@@ -21,6 +21,10 @@ export class TodoStorage {
 		localStorage.setItem('todo-angular', JSON.stringify(this.todos));
 	}
 	
+	private isExist(todo: Todo) {
+		
+	}
+	
 	addTodo(title: String) {
 		let newTodo = new Todo(title);
 		this.todos.push(newTodo);
@@ -32,17 +36,8 @@ export class TodoStorage {
 		this.updateStorage();
 	}
 	
-	getAll() {
-		this.todos = JSON.parse(localStorage.getItem('todo-angular') || '[]');
-	}
-	
-	getByCompleted(completed: Boolean) {
-		this.getAll();
-		this.todos = this.todos.filter((obj) => obj.completed === completed);
-	}
-	
 	removeCompleted(){
-		this.getByCompleted(false);
+		this.todos = this.todos.filter((obj) => obj.completed === false);
 		this.updateStorage();
 	}
 	
@@ -55,10 +50,13 @@ export class TodoStorage {
 		}
 		this.updateStorage();
 	}
-	getIncompleteTodo() {
-		let tempTodos = JSON.parse(localStorage.getItem('todo-angular') || '[]');
-		let count = tempTodos.filter((obj) => obj.completed === false).length;
+	getIncompleteTodoCount() {
+		let count = this.todos.filter((obj) => obj.completed === false).length;
 		return count;
+	}
+	
+	toggleSelectAll(event: any) {
+		this.todos.forEach((obj) => obj.completed = event.checked);
 	}
 	
 }
